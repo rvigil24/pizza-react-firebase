@@ -1,4 +1,5 @@
 import react from "react";
+<<<<<<< HEAD
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -17,6 +18,12 @@ const App = () => {
         <GlobalStyle/>
         <div>app</div>
         </>
+=======
+
+const App = () => {
+    return (
+        <div>app</div>
+>>>>>>> origin/master
     )
 }
 
