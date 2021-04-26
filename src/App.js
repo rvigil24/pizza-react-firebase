@@ -1,8 +1,8 @@
 import react from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
-//components
-import {NavBar} from "./components/NavBar/NavBar";
+//pages
+import { Home } from "./pages/Home";
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -22,7 +22,7 @@ const App = () => {
     return (
         <>
         <GlobalStyle/>
-        <NavBar/>
+        <Home/>
         </>
     )
 }
