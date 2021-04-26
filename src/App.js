@@ -1,7 +1,14 @@
 import react from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
+//components
+import {NavBar} from "./components/NavBar/NavBar";
+
 const GlobalStyle = createGlobalStyle`
+*{
+    margin: 0;
+    padding: 0;
+}
     body{
         font-family: 'Open Sans', sans-serif;
     }
@@ -15,7 +22,7 @@ const App = () => {
     return (
         <>
         <GlobalStyle/>
-        <div>app</div>
+        <NavBar/>
         </>
     )
 }
