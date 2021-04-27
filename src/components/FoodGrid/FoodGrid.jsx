@@ -1,7 +1,7 @@
 import react from "react";
 import styled from "styled-components";
 
-import {Title} from "../../styles/title";
+import { Title } from "../../styles/title";
 
 export const FoodGrid = styled.div`
   display: grid;
@@ -10,13 +10,13 @@ export const FoodGrid = styled.div`
   padding: 20px 0px;
 `;
 
-export const FoodLabel = styled.div`
-    position: absolute;
-    background-color: rgba(255,255, 255, 0.8);
-    padding: 5px;
+export const FoodLabel = styled(Title)`
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
 `;
 
-export const Food = styled(Title)`
+export const Food = styled.div`
   height: 100px;
   padding: 10px;
   font-size: 20px;
@@ -27,13 +27,13 @@ export const Food = styled(Title)`
   margin-top: 5px;
   transition-property: box-shadow filter;
   transition-duration: 0.4s;
-  box-shadow: 2.5px 2.5px 5px rgba(0,0,0, 0.5);
+  box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.5);
   filter: contrast(75%);
-  &:hover{
-      cursor: pointer;
-      box-shadow: 2.5px 2.5px 5px 2.5px rgba(0,0,0, 0.7);
-      margin-top: 0px;
-      margin-bottom: 5px;
-      filter: contrast(100%);
+  &:hover {
+    cursor: pointer;
+    box-shadow: 2.5px 2.5px 5px 2.5px rgba(0, 0, 0, 0.7);
+    margin-top: 0px;
+    margin-bottom: 5px;
+    filter: contrast(100%);
   }
 `;
