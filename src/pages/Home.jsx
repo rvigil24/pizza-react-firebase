@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+
+//hooks
+import { useOpenFood } from "../hooks/useOpenFood";
+import { useOrders } from "../hooks/useOrders";
 
 //components
 import { NavBar } from "../components/NavBar/NavBar";
@@ -8,15 +12,16 @@ import { FoodDialog } from "../components/FoodDialog/FoodDialog";
 import { Order } from "../components/Order/Order";
 
 export const Home = () => {
-  const [openFood, setOpenFood] = useState(null);
+  const openFood = useOpenFood();
+  const orders = useOrders();
 
   return (
     <>
       <NavBar />
-      <Order />
+      <Order {...orders} />
       <Banner />
-      <Menu setOpenFood={setOpenFood} />
-      <FoodDialog setOpenFood={setOpenFood} openFood={openFood} />
+      <Menu {...openFood} />
+      <FoodDialog {...openFood} {...orders} />
     </>
   );
 };

@@ -23,10 +23,20 @@ const OrderContent = styled(FoodDialogContent)`
   height: 100%;
 `;
 
-export const Order = () => {
+export const Order = ({ orders, setOrders }) => {
   return (
     <OrderStyled>
-      <OrderContent>Your order looks pretty empty...</OrderContent>
+      <OrderContent>
+        {orders.length > 0 ? (
+          <>
+            {orders.map((order, index) => (
+              <div key={index}>{order.name}</div>
+            ))}
+          </>
+        ) : (
+          "Your order looks pretty empty..."
+        )}
+      </OrderContent>
       <FoodDialogFooter>
         <ConfirmButtonStyled>Checkout</ConfirmButtonStyled>
       </FoodDialogFooter>

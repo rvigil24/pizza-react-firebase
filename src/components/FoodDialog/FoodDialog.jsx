@@ -65,17 +65,23 @@ export const FoodDialogFooter = styled.div`
   justify-content: center;
 `;
 
-export const FoodDialog = ({ openFood, setOpenFood }) => {
-  function close() {
-    setOpenFood(null);
-  }
-
+export const FoodDialog = ({ openFood, setOpenFood, orders, setOrders }) => {
   if (!openFood) return null;
+  const order = { name: openFood.name };
+
+  const close = () => {
+    setOpenFood(null);
+  };
+
+  const addToOrder = () => {
+    setOrders([...orders, order]);
+    close();
+  };
 
   return (
     openFood && (
       <>
-        <FoodDialogStyled >
+        <FoodDialogStyled>
           {/* banner */}
           <FoodDialogBannerStyled img={openFood.img}>
             <FoodDialogBannerNameStyled>
@@ -88,10 +94,12 @@ export const FoodDialog = ({ openFood, setOpenFood }) => {
 
           {/* footer */}
           <FoodDialogFooter>
-            <ConfirmButtonStyled>Add to order</ConfirmButtonStyled>
+            <ConfirmButtonStyled onClick={addToOrder}>
+              Add to order
+            </ConfirmButtonStyled>
           </FoodDialogFooter>
         </FoodDialogStyled>
-        <FoodDialogShadowStyled onClick={close}/>
+        <FoodDialogShadowStyled onClick={close} />
       </>
     )
   );
