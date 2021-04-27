@@ -11,5 +11,5 @@ const BannerStyled = styled.div`
 `;
 
 export const Banner = () => {
-  return <BannerStyled>h</BannerStyled>;
+  return <BannerStyled/>
 };
