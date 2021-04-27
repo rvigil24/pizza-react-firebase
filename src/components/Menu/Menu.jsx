@@ -7,7 +7,6 @@ import { FoodGrid, Food, FoodLabel } from "../FoodGrid/FoodGrid";
 
 const MenuStyled = styled.div`
   margin: 0px 400px 50px 20px;
-  height: 1000px;
 `;
 
 export const Menu = () => {
