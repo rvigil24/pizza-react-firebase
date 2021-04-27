@@ -1,4 +1,5 @@
 import { GlobalStyle } from "./styles/GlobalStyle";
+
 //pages
 import { Home } from "./pages/Home";
 
