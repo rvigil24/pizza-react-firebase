@@ -23,14 +23,26 @@ const OrderContent = styled(FoodDialogContent)`
   height: 100%;
 `;
 
+const OrderContainer = styled.div`
+  padding: 10px 0px;
+  border-bottom: 1px solid lightgray;
+`;
+
+const OrderItem = styled.div`
+  padding: 10px 0px;
+`;
+
 export const Order = ({ orders, setOrders }) => {
   return (
     <OrderStyled>
       <OrderContent>
         {orders.length > 0 ? (
           <>
+            <h2 >Your order</h2>
             {orders.map((order, index) => (
-              <div key={index}>{order.name}</div>
+              <OrderContainer key={index}>
+                <OrderItem>{order.name}</OrderItem>
+              </OrderContainer>
             ))}
           </>
         ) : (
