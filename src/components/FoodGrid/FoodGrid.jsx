@@ -7,6 +7,7 @@ export const FoodGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  padding: 20px 0px;
 `;
 
 export const FoodLabel = styled.div`
