@@ -6,7 +6,7 @@ import {
 } from "../FoodDialog/FoodDialog";
 
 //data
-import { formatPrice } from "../../FoodData";
+import { formatPrice, getPrice } from "../../FoodData";
 
 const OrderStyled = styled.div`
   position: fixed;
@@ -48,9 +48,9 @@ export const Order = ({ orders, setOrders }) => {
             {orders.map((order, index) => (
               <OrderContainer key={index}>
                 <OrderItem>
-                  <div>1</div>
+                  <div>{order.quantity}</div>
                   <div>{order.name}</div>
-                  <div>{formatPrice(order.price)}</div>
+                  <div>{formatPrice(getPrice(order))}</div>
                 </OrderItem>
               </OrderContainer>
             ))}

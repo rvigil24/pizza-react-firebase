@@ -93,3 +93,7 @@ export const formatPrice = (price) => {
         currency: "USD"
     })
 }
+
+export const getPrice = (order) => {
+    return order.quantity * order.price
+}

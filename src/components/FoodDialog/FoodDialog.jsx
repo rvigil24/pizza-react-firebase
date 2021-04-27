@@ -2,11 +2,15 @@ import styled from "styled-components";
 import { pizzaRed } from "../../styles/colors";
 import { Title } from "../../styles/title";
 
+//hooks
+import { useQuantity } from "../../hooks/useQuantity";
+
 //data
-import { formatPrice } from "../../FoodData";
+import { formatPrice, getPrice } from "../../FoodData";
 
 //components
 import { FoodLabel } from "../FoodGrid/FoodGrid";
+import { QuantityInput } from "./QuantityInput";
 
 const FoodDialogStyled = styled.div`
   max-height: calc(100% - 100px);
@@ -47,6 +51,7 @@ const FoodDialogBannerNameStyled = styled(FoodLabel)`
 export const FoodDialogContent = styled.div`
   overflow: auto;
   min-height: 100px;
+  padding: 0px 40px;
 `;
 
 export const ConfirmButtonStyled = styled(Title)`
@@ -68,9 +73,9 @@ export const FoodDialogFooter = styled.div`
   justify-content: center;
 `;
 
-export const FoodDialog = ({ openFood, setOpenFood, orders, setOrders }) => {
-  if (!openFood) return null;
-  const order = { ...openFood };
+const FoodDialogContainer = ({ openFood, setOpenFood, orders, setOrders }) => {
+  const quantity = useQuantity(openFood && openFood.quantity);
+  const order = { ...openFood, quantity: quantity.value };
 
   const close = () => {
     setOpenFood(null);
@@ -93,12 +98,14 @@ export const FoodDialog = ({ openFood, setOpenFood, orders, setOrders }) => {
           </FoodDialogBannerStyled>
 
           {/* content */}
-          <FoodDialogContent></FoodDialogContent>
+          <FoodDialogContent>
+            <QuantityInput quantity={quantity} />
+          </FoodDialogContent>
 
           {/* footer */}
           <FoodDialogFooter>
             <ConfirmButtonStyled onClick={addToOrder}>
-              Add to order: {formatPrice(openFood.price)}
+              Add to order: {formatPrice(getPrice(order))}
             </ConfirmButtonStyled>
           </FoodDialogFooter>
         </FoodDialogStyled>
@@ -106,4 +113,9 @@ export const FoodDialog = ({ openFood, setOpenFood, orders, setOrders }) => {
       </>
     )
   );
+};
+
+export const FoodDialog = (props) => {
+  if (!props.openFood) return null;
+  return <FoodDialogContainer {...props} />;
 };
