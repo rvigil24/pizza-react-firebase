@@ -4,6 +4,7 @@ import { Title } from "../../styles/title";
 
 //hooks
 import { useQuantity } from "../../hooks/useQuantity";
+import { useToppings } from "../../hooks/useToppings";
 
 //data
 import { formatPrice, getPrice } from "../../FoodData";
@@ -11,6 +12,7 @@ import { formatPrice, getPrice } from "../../FoodData";
 //components
 import { FoodLabel } from "../FoodGrid/FoodGrid";
 import { QuantityInput } from "./QuantityInput";
+import { Toppings } from "./Toppings";
 
 const FoodDialogStyled = styled.div`
   max-height: calc(100% - 100px);
@@ -52,6 +54,7 @@ export const FoodDialogContent = styled.div`
   overflow: auto;
   min-height: 100px;
   padding: 0px 40px;
+  padding-bottom: 50px;
 `;
 
 export const ConfirmButtonStyled = styled(Title)`
@@ -73,9 +76,19 @@ export const FoodDialogFooter = styled.div`
   justify-content: center;
 `;
 
+const hasToppings = (food) => {
+  return food.section === "Pizza";
+};
+
 const FoodDialogContainer = ({ openFood, setOpenFood, orders, setOrders }) => {
   const quantity = useQuantity(openFood && openFood.quantity);
-  const order = { ...openFood, quantity: quantity.value };
+  const toppings = useToppings(openFood.toppings);
+
+  const order = {
+    ...openFood,
+    quantity: quantity.value,
+    toppings: toppings.toppings,
+  };
 
   const close = () => {
     setOpenFood(null);
@@ -100,6 +113,13 @@ const FoodDialogContainer = ({ openFood, setOpenFood, orders, setOrders }) => {
           {/* content */}
           <FoodDialogContent>
             <QuantityInput quantity={quantity} />
+            {hasToppings(openFood) && (
+              <>
+                <br />
+                <h3>Would you like toppings?</h3>
+                <Toppings {...toppings} />
+              </>
+            )}
           </FoodDialogContent>
 
           {/* footer */}

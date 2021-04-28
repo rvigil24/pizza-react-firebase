@@ -79,6 +79,8 @@ export const foodItems = [
     
 ];
 
+const pricePerTopping = 0.50;
+
 export const foods = foodItems.reduce( (res, food) => {
     if(!res[food.section]){
         res[food.section] = [];
@@ -95,5 +97,6 @@ export const formatPrice = (price) => {
 }
 
 export const getPrice = (order) => {
-    return order.quantity * order.price
+    const toppingPrice = order.toppings.filter(t => t.checked).length * pricePerTopping;
+    return order.quantity * (order.price + toppingPrice )
 }
