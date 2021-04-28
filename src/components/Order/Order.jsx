@@ -39,12 +39,21 @@ const OrderItem = styled.div`
 `;
 
 export const Order = ({ orders, setOrders }) => {
+  const subtotal = orders.reduce((total, order) => {
+    return total + getPrice(order);
+  }, 0);
+
+  const tax = subtotal * 0.13;
+  const total = subtotal + tax;
+
   return (
     <OrderStyled>
       <OrderContent>
         {orders.length > 0 ? (
           <>
             <h2>Your order</h2>
+
+            {/* items list */}
             {orders.map((order, index) => (
               <OrderContainer key={index}>
                 <OrderItem>
@@ -54,6 +63,30 @@ export const Order = ({ orders, setOrders }) => {
                 </OrderItem>
               </OrderContainer>
             ))}
+
+            {/* subtotal, tax, total */}
+            <OrderContainer>
+              {/* subtotal */}
+              <OrderItem>
+                <div />
+                <div>Subtotal</div>
+                <div>{formatPrice(subtotal)}</div>
+              </OrderItem>
+
+              {/* tax */}
+              <OrderItem>
+                <div />
+                <div>Tax</div>
+                <div>{formatPrice(tax)}</div>
+              </OrderItem>
+
+              {/* total */}
+              <OrderItem>
+                <div />
+                <div>Total</div>
+                <div>{formatPrice(total)}</div>
+              </OrderItem>
+            </OrderContainer>
           </>
         ) : (
           "Your order looks pretty empty..."
