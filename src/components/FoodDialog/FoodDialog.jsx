@@ -5,6 +5,7 @@ import { Title } from "../../styles/title";
 //hooks
 import { useQuantity } from "../../hooks/useQuantity";
 import { useToppings } from "../../hooks/useToppings";
+import { useChoice } from "../../hooks/useChoice";
 
 //data
 import { formatPrice, getPrice } from "../../FoodData";
@@ -13,6 +14,7 @@ import { formatPrice, getPrice } from "../../FoodData";
 import { FoodLabel } from "../FoodGrid/FoodGrid";
 import { QuantityInput } from "./QuantityInput";
 import { Toppings } from "./Toppings";
+import { Choices } from "./Choices";
 
 const FoodDialogStyled = styled.div`
   max-height: calc(100% - 100px);
@@ -39,15 +41,15 @@ const FoodDialogShadowStyled = styled.div`
 const FoodDialogBannerStyled = styled.div`
   min-height: 200px;
   margin-bottom: 20px;
-  ${({ img }) => `background-image: url(${img});`}
+  ${({ img }) => (img ? `background-image: url(${img});` : `min-height: 75px;`)}
   background-position: center;
   background-size: cover;
 `;
 
 const FoodDialogBannerNameStyled = styled(FoodLabel)`
-  top: 100px;
   font-size: 30px;
   padding: 5px 40px;
+  top: ${({ img }) => (img ? `100px` : `20px`)};
 `;
 
 export const FoodDialogContent = styled.div`
@@ -67,6 +69,11 @@ export const ConfirmButtonStyled = styled(Title)`
   text-align: center;
   border-radius: 5px;
   cursor: pointer;
+  ${({disabled}) => disabled && `
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: gray;
+  `}
 `;
 
 export const FoodDialogFooter = styled.div`
@@ -83,11 +90,13 @@ const hasToppings = (food) => {
 const FoodDialogContainer = ({ openFood, setOpenFood, orders, setOrders }) => {
   const quantity = useQuantity(openFood && openFood.quantity);
   const toppings = useToppings(openFood.toppings);
+  const choiceRadio = useChoice(openFood.choice);
 
   const order = {
     ...openFood,
     quantity: quantity.value,
     toppings: toppings.toppings,
+    choices: choiceRadio,
   };
 
   const close = () => {
@@ -120,11 +129,17 @@ const FoodDialogContainer = ({ openFood, setOpenFood, orders, setOrders }) => {
                 <Toppings {...toppings} />
               </>
             )}
+            {openFood.choices && (
+              <Choices openFood={openFood} choiceRadio={choiceRadio} />
+            )}
           </FoodDialogContent>
 
           {/* footer */}
           <FoodDialogFooter>
-            <ConfirmButtonStyled onClick={addToOrder}>
+            <ConfirmButtonStyled
+              disabled={openFood.choices && !choiceRadio.value}
+              onClick={addToOrder}
+            >
               Add to order: {formatPrice(getPrice(order))}
             </ConfirmButtonStyled>
           </FoodDialogFooter>

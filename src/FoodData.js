@@ -76,6 +76,13 @@ export const foodItems = [
         price: 2,
         img: "https://res.cloudinary.com/dfrcck8j7/image/upload/v1619494086/pizza-react-firebase/menu/onion_rings_nymuke.jpg"
     },
+    {
+        id: 12,
+        name: "Soda",
+        section: "Drinks",
+        price: 2,
+        choices: ["Coke", "Sprite"]
+    }
     
 ];
 

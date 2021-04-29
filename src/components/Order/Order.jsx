@@ -50,7 +50,6 @@ export const Order = ({ orders, setOrders }) => {
 
   const tax = subtotal * 0.13;
   const total = subtotal + tax;
-
   return (
     <OrderStyled>
       <OrderContent>
@@ -59,21 +58,25 @@ export const Order = ({ orders, setOrders }) => {
             <h2>Your order</h2>
 
             {/* items list */}
-            {orders.map((order, index) => (
-              <OrderContainer key={index}>
-                <OrderItem>
-                  <div>{order.quantity}</div>
-                  <div>{order.name}</div>
-                  <div>{formatPrice(getPrice(order))}</div>
-                </OrderItem>
-                <DetailItem>
-                  {order.toppings
-                    .filter((t) => t.checked)
-                    .map((t) => t.name)
-                    .join(", ")}
-                </DetailItem>
-              </OrderContainer>
-            ))}
+            {orders.map((order, index) => {
+              console.log(order);
+              return (
+                <OrderContainer key={index}>
+                  <OrderItem>
+                    <div>{order.quantity}</div>
+                    <div>{order.name}</div>
+                    <div>{formatPrice(getPrice(order))}</div>
+                  </OrderItem>
+                  <DetailItem>
+                    {order.toppings
+                      .filter((t) => t.checked)
+                      .map((t) => t.name)
+                      .join(", ")}
+                  </DetailItem>
+                  {order.choices && <DetailItem>{order.choices.value}</DetailItem>}
+                </OrderContainer>
+              );
+            })}
 
             {/* subtotal, tax, total */}
             <OrderContainer>
