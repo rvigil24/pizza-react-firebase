@@ -4,6 +4,7 @@ import React from "react";
 import { useOpenFood } from "../hooks/useOpenFood";
 import { useOrders } from "../hooks/useOrders";
 import { useTitle } from "../hooks/useTitle";
+import { useAuthentication } from "../hooks/useAuthentication";
 
 //components
 import { NavBar } from "../components/NavBar/NavBar";
@@ -13,14 +14,15 @@ import { FoodDialog } from "../components/FoodDialog/FoodDialog";
 import { Order } from "../components/Order/Order";
 
 export const Home = () => {
+  const auth = useAuthentication();
   const openFood = useOpenFood();
   const orders = useOrders();
   useTitle({ openFood: openFood.openFood, orders: [...orders.orders] });
 
   return (
     <>
-      <NavBar />
-      <Order {...orders} {...openFood} />
+      <NavBar {...auth} />
+      <Order {...orders} {...auth} />
       <Banner />
       <Menu {...openFood} />
       <FoodDialog {...openFood} {...orders} />
