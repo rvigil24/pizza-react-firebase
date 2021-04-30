@@ -20,7 +20,7 @@ export const Home = () => {
   return (
     <>
       <NavBar />
-      <Order {...orders} />
+      <Order {...orders} {...openFood} />
       <Banner />
       <Menu {...openFood} />
       <FoodDialog {...openFood} {...orders} />

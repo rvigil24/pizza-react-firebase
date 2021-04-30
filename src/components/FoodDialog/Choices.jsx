@@ -12,6 +12,7 @@ const Label = styled.label`
 `;
 
 export const Choices = ({ openFood, choiceRadio }) => {
+  console.log(openFood);
   return (
     <>
       <br />

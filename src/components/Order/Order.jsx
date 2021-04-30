@@ -43,10 +43,16 @@ const DetailItem = styled.div`
   font-size: 10px;
 `;
 
-export const Order = ({ orders, setOrders }) => {
+export const Order = ({ orders, setOrders, setOpenFood }) => {
   const subtotal = orders.reduce((total, order) => {
     return total + getPrice(order);
   }, 0);
+
+  const deleteItem = (index) => {
+    const newOrders = [...orders];
+    newOrders.splice(index, 1);
+    setOrders(newOrders);
+  };
 
   const tax = subtotal * 0.13;
   const total = subtotal + tax;
@@ -59,21 +65,31 @@ export const Order = ({ orders, setOrders }) => {
 
             {/* items list */}
             {orders.map((order, index) => {
-              console.log(order);
               return (
                 <OrderContainer key={index}>
+                  {/* item */}
                   <OrderItem>
                     <div>{order.quantity}</div>
                     <div>{order.name}</div>
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() => deleteItem(index)}
+                    >
+                      🗑️
+                    </div>
                     <div>{formatPrice(getPrice(order))}</div>
                   </OrderItem>
+
+                  {/* item details */}
                   <DetailItem>
                     {order.toppings
                       .filter((t) => t.checked)
                       .map((t) => t.name)
                       .join(", ")}
                   </DetailItem>
-                  {order.choices && <DetailItem>{order.choices.value}</DetailItem>}
+                  {order.choices && (
+                    <DetailItem>{order.choices.value}</DetailItem>
+                  )}
                 </OrderContainer>
               );
             })}
