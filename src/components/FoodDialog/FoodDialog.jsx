@@ -69,7 +69,9 @@ export const ConfirmButtonStyled = styled(Title)`
   text-align: center;
   border-radius: 5px;
   cursor: pointer;
-  ${({disabled}) => disabled && `
+  ${({ disabled }) =>
+    disabled &&
+    `
   pointer-events: none;
   opacity: 0.5;
   background-color: gray;
@@ -107,7 +109,7 @@ const FoodDialogContainer = ({ openFood, setOpenFood, orders, setOrders }) => {
     setOrders([...orders, order]);
     close();
   };
-
+  
   return (
     openFood && (
       <>

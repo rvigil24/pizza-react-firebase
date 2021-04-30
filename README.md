@@ -1,1 +1,1 @@
-This is a restaurant ordering app built with React Hooks, Firebase and Styled Components
+This is a restaurant ordering app built with React Hooks, CSS grid and Styled Components
