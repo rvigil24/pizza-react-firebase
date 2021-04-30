@@ -12,7 +12,6 @@ const Label = styled.label`
 `;
 
 export const Choices = ({ openFood, choiceRadio }) => {
-  console.log(openFood);
   return (
     <>
       <br />
@@ -25,9 +24,9 @@ export const Choices = ({ openFood, choiceRadio }) => {
             name="choice"
             value={choice}
             checked={choiceRadio.value === choice}
-            onChange={(e) => choiceRadio.onChange(e)}
+            onChange={choiceRadio.onChange}
           />
-          <Label for={choice}>{choice}</Label>
+          <Label htmlFor={choice}>{choice}</Label>
         </React.Fragment>
       ))}
     </>

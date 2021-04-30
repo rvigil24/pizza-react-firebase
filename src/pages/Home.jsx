@@ -13,6 +13,7 @@ import { Menu } from "../components/Menu/Menu";
 import { FoodDialog } from "../components/FoodDialog/FoodDialog";
 import { Order } from "../components/Order/Order";
 
+
 export const Home = () => {
   const auth = useAuthentication();
   const openFood = useOpenFood();

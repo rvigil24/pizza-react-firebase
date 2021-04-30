@@ -8,6 +8,9 @@ import {
 //data
 import { formatPrice, getPrice } from "../../FoodData";
 
+//database
+const db = window.firebase.firestore();
+
 const OrderStyled = styled.div`
   position: fixed;
   right: 0px;
@@ -42,6 +45,44 @@ const DetailItem = styled.div`
   color: gray;
   font-size: 10px;
 `;
+
+const sendOrder = (orders, { email, displayName }) => {
+  const newOrders = orders.map((order) => {
+    return Object.keys(order).reduce((acc, orderKey) => {
+      if (!order[orderKey]) {
+        return acc;
+      }
+      if (orderKey === "toppings") {
+        return {
+          ...acc,
+          [orderKey]: order[orderKey]
+            .filter(({ checked }) => checked)
+            .map(({ name }) => name),
+        };
+      }
+
+      return {
+        ...acc,
+        [orderKey]: order[orderKey],
+      };
+    }, {});
+  });
+
+  console.log(newOrders);
+
+  db.collection("orders")
+    .add({
+      order: newOrders,
+      email,
+      displayName,
+    })
+    .then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    });
+};
 
 export const Order = ({ orders, setOrders, setOpenFood, loggedIn, login }) => {
   const subtotal = orders.reduce((total, order) => {
@@ -126,7 +167,7 @@ export const Order = ({ orders, setOrders, setOpenFood, loggedIn, login }) => {
         <ConfirmButtonStyled
           onClick={() => {
             if (loggedIn) {
-              console.log("logged in");
+              sendOrder(orders, loggedIn);
             } else {
               login();
             }

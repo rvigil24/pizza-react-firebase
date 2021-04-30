@@ -98,7 +98,7 @@ const FoodDialogContainer = ({ openFood, setOpenFood, orders, setOrders }) => {
     ...openFood,
     quantity: quantity.value,
     toppings: toppings.toppings,
-    choices: choiceRadio,
+    choices: choiceRadio.value,
   };
 
   const close = () => {
