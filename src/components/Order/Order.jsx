@@ -84,7 +84,14 @@ const sendOrder = (orders, { email, displayName }) => {
     });
 };
 
-export const Order = ({ orders, setOrders, setOpenFood, loggedIn, login }) => {
+export const Order = ({
+  orders,
+  setOrders,
+  setOpenFood,
+  loggedIn,
+  login,
+  setOpenOrderDialog,
+}) => {
   const subtotal = orders.reduce((total, order) => {
     return total + getPrice(order);
   }, 0);
@@ -164,17 +171,20 @@ export const Order = ({ orders, setOrders, setOpenFood, loggedIn, login }) => {
         )}
       </OrderContent>
       <FoodDialogFooter>
-        <ConfirmButtonStyled
-          onClick={() => {
-            if (loggedIn) {
-              sendOrder(orders, loggedIn);
-            } else {
-              login();
-            }
-          }}
-        >
-          Checkout
-        </ConfirmButtonStyled>
+      {orders.length > 0 && (
+          <ConfirmButtonStyled
+            onClick={() => {
+              if (loggedIn) {
+                setOpenOrderDialog(true);
+                sendOrder(orders, loggedIn);
+              } else {
+                login();
+              }
+            }}
+          >
+            Checkout
+          </ConfirmButtonStyled>  
+        )}
       </FoodDialogFooter>
     </OrderStyled>
   );

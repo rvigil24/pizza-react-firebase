@@ -25,7 +25,7 @@ export const FoodDialogStyled = styled.div`
   top: 75px;
   left: calc(50% - 250px);
   background-color: white;
-  z-index: 5;
+  z-index: 12;
 `;
 
 export const FoodDialogShadowStyled = styled.div`
@@ -35,7 +35,7 @@ export const FoodDialogShadowStyled = styled.div`
   top: 0px;
   background-color: black;
   opacity: 0.7;
-  z-index: 4;
+  z-index: 11;
 `;
 
 const FoodDialogBannerStyled = styled.div`

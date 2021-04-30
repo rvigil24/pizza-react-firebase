@@ -1,23 +1,37 @@
 import {
-  FoodDialog,
+  FoodDialogStyled,
   FoodDialogContent,
   FoodDialogShadowStyled,
   FoodDialogFooter,
   ConfirmButtonStyled,
 } from "../FoodDialog/FoodDialog";
 
-export const OrderDialog = () => {
-  return (
+export const OrderDialog = ({
+  openOrderDialog,
+  setOpenOrderDialog,
+  setOrders,
+}) => {
+  return openOrderDialog ? (
     <>
-      <FoodDialogShadowStyled />
-      <FoodDialog>
+      <FoodDialogStyled>
         <FoodDialogContent>
-          <h2>Your order is on the way!</h2>
+          <h2>🚚 Your order is on the way!</h2>
+          <p>Thanks for choosing us! Your order will be sent ASAP!</p>
         </FoodDialogContent>
         <FoodDialogFooter>
-          <ConfirmButtonStyled>I'm still hungry</ConfirmButtonStyled>
+          <ConfirmButtonStyled
+            onClick={() => {
+              setOrders([]);
+              setOpenOrderDialog();
+            }}
+          >
+            I'm still hungry
+          </ConfirmButtonStyled>
         </FoodDialogFooter>
-      </FoodDialog>
+      </FoodDialogStyled>
+      <FoodDialogShadowStyled />
     </>
+  ) : (
+    <div />
   );
 };
