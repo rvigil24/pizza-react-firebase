@@ -26,6 +26,11 @@ export const FoodDialogStyled = styled.div`
   left: calc(50% - 250px);
   background-color: white;
   z-index: 12;
+  @media(max-width: 450px) {
+    width: 100%; 
+    left: 0px; 
+    z-index: 12; 
+  }
 `;
 
 export const FoodDialogShadowStyled = styled.div`

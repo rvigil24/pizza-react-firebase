@@ -22,6 +22,11 @@ const OrderStyled = styled.div`
   box-shadow: 4px 0px 5px 5px grey;
   display: flex;
   flex-direction: column;
+  
+  @media(max-width: 450px) {
+    position: relative;
+    width: 100%;
+  }
 `;
 
 const OrderContent = styled(FoodDialogContent)`
@@ -171,7 +176,7 @@ export const Order = ({
         )}
       </OrderContent>
       <FoodDialogFooter>
-      {orders.length > 0 && (
+        {orders.length > 0 && (
           <ConfirmButtonStyled
             onClick={() => {
               if (loggedIn) {
@@ -183,7 +188,7 @@ export const Order = ({
             }}
           >
             Checkout
-          </ConfirmButtonStyled>  
+          </ConfirmButtonStyled>
         )}
       </FoodDialogFooter>
     </OrderStyled>

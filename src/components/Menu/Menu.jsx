@@ -7,6 +7,10 @@ import { FoodGrid, Food, FoodLabel } from "../FoodGrid/FoodGrid";
 
 const MenuStyled = styled.div`
   margin: 10px 400px 50px 20px;
+  @media(max-width: 450px) {
+    width: 100%; 
+    margin: 0px; 
+  }
 `;
 
 export const Menu = ({ setOpenFood }) => {
