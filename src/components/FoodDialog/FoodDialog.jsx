@@ -16,7 +16,7 @@ import { QuantityInput } from "./QuantityInput";
 import { Toppings } from "./Toppings";
 import { Choices } from "./Choices";
 
-const FoodDialogStyled = styled.div`
+export const FoodDialogStyled = styled.div`
   max-height: calc(100% - 100px);
   width: 500px;
   display: flex;
@@ -25,17 +25,17 @@ const FoodDialogStyled = styled.div`
   top: 75px;
   left: calc(50% - 250px);
   background-color: white;
-  z-index: 5;
+  z-index: 11;
 `;
 
-const FoodDialogShadowStyled = styled.div`
+export const FoodDialogShadowStyled = styled.div`
   position: fixed;
   height: 100%;
   width: 100%;
   top: 0px;
   background-color: black;
   opacity: 0.7;
-  z-index: 4;
+  z-index: 11;
 `;
 
 const FoodDialogBannerStyled = styled.div`
